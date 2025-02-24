@@ -25,3 +25,9 @@ jobs:
         run:
           source venv/bin/activate
           pytest
+
+      - name: Deploy
+        if: success()
+        run:
+          docker build -t myapp:latest .
+          docker run -d -p 8000:8000 myapp
